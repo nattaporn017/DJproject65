@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block content %}
+    {% load static %}
+    {% load humanize %}
+    <div class="row  text-center "style="background-color: lightyellow">
+        <div class="col-lg-4"></div>
+        <div class="col-lg-4">
+            <img src="{% static "images/ttCategories.png" %}">
+        </div>
+        <div class="col-lg-4"></div>
+        <div class="row ">
+            <div class="col-lg-1"></div>
+            <div class="col-lg-10">
+                <table class="table table-warning table-hover table-striped table-bordered text-center">
+                    <tr>
+
+                        <th>หมวดหมู่</th>
+                        <th>รายละเอียดเพิ่มเติม</th>
+                        <th>
+                            <a href="{% url 'createCategories' %}">
+                                <button class="btn btn-warning" data-bs-toggle="tooltip" title="create!">
+                                    เพิ่มหมวดหมู่สินค้า <i class=" fa fa-plus"></i>
+                                </button>
+                            </a>
+                        </th>
+                    </tr>
+                    {% for cate in result %}
+                        <tr>
+                            <td>{{ cate.name }}</td>
+                            <td>{{ cate.desc }}</td>
+
+                            <td>
+                                <a href="{% url 'oneCategories' cate.cgid %}" data-bs-toggle="tooltip" title="desc!"style="color: black">
+                                    <i class="fa fa-search">&emsp;</i>
+                                </a>
+{##}
+                                <a href="{% url 'updateCategories' cate.cgid %}" data-bs-toggle="tooltip" title="update!"style="color: black">
+                                    <i class="fas fa-file-signature">&emsp;</i>
+                                </a>
+
+                                <a href="{% url 'gtdelCategories' cate.cgid %}" data-bs-toggle="tooltip" title="delete!"style="color: black">
+                                    <i class="fa fa-trash-alt"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+            <div class="col-lg-1"></div>
+        </div>
+    </div>
+<br><br><br><br><br><br><br><br><br><br><br>
+{% endblock %}

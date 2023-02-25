@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load  static %}
+{% block content %}
+    <div id="summary">
+
+        <div class="row">
+            <br><br>
+            <div class="col col-12 text-success"><h2> &#10024; สั่งซื้อเรียบร้อย &#10024;</h2></div>
+            <br><br>
+            <div class="lead text-dark">
+                <h5>
+                    Order ID: <b class="text-danger">{{ order.oid }} </b><br>
+                    วันที่ : {{ order.odate|date:"Y-m-d H:i:s" }} <br>
+                    ลูกค้า : {{ order.customer.name }}<br>
+                    ที่อยู่ : {{ order.customer.address }}<br>
+                    เบอร์โทรศัพท์ : {{ order.customer.tel }}
+                </h5>
+            </div>
+        </div>
+
+        <table class="table table-secondary table-bordered">
+            <tr class="text-center text-dark">
+                <th class="col col-1">รหัสสินค้า</th>
+                <th class="col col-4">สินค้า</th>
+                <th class="col col-1">ราคาต่อหน่วย</th>
+                <th class="col col-1">จำนวน</th>
+                <th class="col col-2">รวม</th>
+            </tr>
+
+            <tr>
+                <td style="background-color: lightyellow"></td>
+            </tr>
+
+            {% for item in items %}
+                <tr>
+                    <td class="text-center">{{ item.accessories.aid }}  </td>
+                    <td class="text-start">{{ item.accessories.name }}</td>
+                    <td class="text-end">{{ item.accessories.price }}</td>
+                    <td class="text-center">{{ item.quantity }}</td>
+                    <td class="text-end"><b>{{ item.total | floatformat:2 }}</b></td>
+                </tr>
+
+                <tr class="bg-white">
+                    <td style="background-color: lightyellow"></td>
+                </tr>
+            {% endfor %}
+
+            <tr class="text-end text-success">
+                <td colspan="4" class="bg-white"><h3> จำนวนทั้งหมด :</h3></td>
+                <td class="bg-white"><h3>{{ count }} </h3></td>
+            </tr>
+
+            <tr class="text-end text-success">
+                <td colspan="4" class="bg-white"><h3> ยอดสุทธิ : </h3></td>
+                <td class="bg-white"><h3>{{ sum | floatformat:2 }} </h3></td>
+            </tr>
+
+        </table>
+
+    </div>
+    <br><br><br><br>
+{% endblock %}

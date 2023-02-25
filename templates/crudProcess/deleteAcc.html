@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block content %}
+    {% load static %}
+    {% load humanize %}
+    <br>
+    <div class="row  text-center">
+        <h1 class="text-center text-dark "> ลบข้อมูลพนักงาน </h1>
+        <h2 class="text-white">...................................................</h2>
+        <div class="col-lg-3"></div>
+        <div class="col-lg-6">
+                       <table class="table table-warning table-striped " style="font-size: 20px"><br>
+                <tr>
+                    <td align="right">หมวดหมู่สินค้า :</td>
+                    <td align="left">{{ acc.category.name }}</td>
+                </tr>
+                <tr>
+                    <td align="right">รหัสสินค้า :</td>
+                    <td align="left">{{ acc.aid }}</td>
+                </tr>
+                <tr>
+                    <td align="right">สินค้า :</td>
+                    <td align="left">{{ acc.name }}</td>
+                </tr>
+                <tr>
+                    <td align="right">ราคา :</td>
+                    <td align="left">{{ acc.price }}</td>
+                </tr>
+                <tr>
+                    <td align="right">คงเหลือ :</td>
+                    <td align="left">{{ acc.net }}</td>
+                </tr>
+            </table>
+            <a onclick="history.back();" class="btn btn-warning">
+                <i class="fas fa-backward"></i> ย้อนกลับ
+            </a>
+            <a href="{% url 'deleteAcc' acc.aid  %}" onclick="return confirm('โปรดยืนยันการลบข้แมูล');">
+                <button class="btn btn-success">
+                    ลบข้อมูล <i class="fas fa-trash"></i>
+                </button>
+            </a>
+            <div class="col-lg-3"></div>
+            <br><br><br><br><br><br><br><br><br><br><br>
+        </div>
+    </div>
+{% endblock %}

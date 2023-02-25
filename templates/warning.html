@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% load static %}
+{#{% load fontawesome_5 %}#}
+{% block content %}
+     <head>
+        <style>
+            body {background-color: floralwhite}
+</style>
+
+</head><br>
+        <div class="row">
+            <h3 class="text-center display-10" style="background-color:yellow"><b><u>พัสดุต้องห้าม!!!</u></b></h3>
+            <br><br>
+    </div>
+    <div class="container-fluid">
+      <div class="row ">
+        <div class="col col-12">  </div>
+          <div class="col col-12/ "style="background-color: lemonchiffon">
+
+            <br>
+
+    <!-- Carousel -->
+<div id="demo" class="carousel slide" data-bs-ride="carousel">
+
+  <!-- Indicators/dots -->
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#demo" data-bs-slide-to="0" class="active"></button>
+    <button type="button" data-bs-target="#demo" data-bs-slide-to="1"></button>
+    <button type="button" data-bs-target="#demo" data-bs-slide-to="2"></button>
+  </div>
+
+  <!-- The slideshow/carousel -->
+  <div class="carousel-inner align-content-center">
+    <div class="carousel-item active">
+      <img src="{% static 'images/warning1.jpg' %}"alt="Los Angeles" class="d-grid w-100">
+    </div>
+    <div class="carousel-item">
+      <img src="{% static 'images/warning2.jpg' %}" alt="Chicago" class="d-block w-100">
+    </div>
+    <div class="carousel-item">
+      <img src="{% static 'images/warning4.jpg' %}" alt="Chicago" class="d-block w-100">
+    </div>
+
+
+  </div>
+
+  <!-- Left and right controls/icons -->
+  <button class="carousel-control-prev" type="button" data-bs-target="#demo" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon"></span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#demo" data-bs-slide="next">
+    <span class="carousel-control-next-icon"></span>
+  </button>
+</div>
+            </div></div></div>
+        <p>
+        <br><br>
+            <h2>สินค้าต้องห้าม</h2>
+        <b> &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp;สินค้าต้องห้ามคือ สินค้าที่ Fast Express ไม่รับขนส่งโดยเด็ดขาด หากพบสินค้าดังกล่าว Fast Expressจะดำเนินการตามขั้นตอนของบริษัทหรือกฎหมายต่อไป และจะไม่รับผิดชอบหากเกิดความเสียหายหรือสูญหายทุกกรณี<br></b>
+        &nbsp; &nbsp; &nbsp; &nbsp; - อาวุธ ยุทโธปกรณ์ หรือสิ่งเทียมอาวุธทุกชนิด เช่น ปืน กระสุน ระเบิด ระเบิดดัดแปลง ปืนอัดลม <br>
+        &nbsp; &nbsp; &nbsp; &nbsp; - สินค้าผิดกฎหมาย สินค้าหลีกเลี่ยงภาษี สินค้าลักลอบนำเข้า เช่น บุหรี่และน้ำยาบุหรี่ไฟฟ้า <br>
+        &nbsp; &nbsp; &nbsp; &nbsp; - ยาเสพติดหรือสิ่งเสพติดที่ผิดกฎหมายทุกชนิด ตามพระราชบัญญัติสารเสพติดให้โทษ เช่น โคเคน เฮโรอีน ยาบ้า <br>
+        &nbsp; &nbsp; &nbsp; &nbsp; - วัตถุไวไฟ และวัตถุระเบิดทุกชนิด เช่น วัสดุติดไฟง่าย ดอกไม้ไฟ พลุ <br>
+        &nbsp; &nbsp; &nbsp; &nbsp; - สัตว์ สิ่งมีชีวิต <br>
+        &nbsp; &nbsp; &nbsp; &nbsp; - เอกสารที่ระบุข้อมูลส่วนบุคคลทุกชนิด เอกสารทั่วไป และเอกสารที่ทางราชการออกให้ทั้งตัวจริงหรือสำเนา เช่น บัตรประจำตัวประชาชน ใบขับขี่ หนังสือเดินทาง สูติบัตร <br>
+        &nbsp; &nbsp; &nbsp; &nbsp; - เอกสารที่เกี่ยวกับการเงิน เช่น เงินตราทุกสกุล ทั้งธนบัตรและเหรียญ หุ้น พันธบัตร เช็ค <br>
+        &nbsp; &nbsp; &nbsp; &nbsp; - สินค้าราคาสูง สินค้าที่ไม่สามารถประเมินค่าได้ เช่น เพชร ทองคำแท่ง ทองคำรูปพรรณ <br>
+
+
+        <br><br><br>
+    </p>
+
+
+{% endblock %}

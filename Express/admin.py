@@ -1,0 +1,20 @@
+from django.contrib import admin
+from Express.models import *
+# Register your models here.
+admin.site.register(Branch)
+admin.site.register(Categories)
+admin.site.register(Accessoriess)
+admin.site.register(Employees)
+admin.site.register(Customers)
+admin.site.register(Orders)
+admin.site.register(OrderDetails)
+admin.site.register(Transfers)
+admin.site.register(Servise)
+admin.site.register(District)
+# admin.site.register(Customers)
+# admin.site.register(Departments)
+# admin.site.register(Employees)
+# admin.site.register(Accessories)
+# admin.site.register(Orders)
+# admin.site.register(OrderDetails)
+# admin.site.register(Transfers)

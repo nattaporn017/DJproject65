@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block content %}
+    {% load static %}
+    {% load humanize %}
+    <br>
+    <div class="row  text-center">
+        <h1 class="text-center text-dark "> ลบข้อมูลหมวดสินค้า </h1>
+        <h2 class="text-white">...................................................</h2>
+        <div class="col-lg-3"></div>
+        <div class="col-lg-6">
+            <table class="table table-warning table-striped " style="font-size: 20px"><br>
+                <tr>
+                    <td align="right">หมวดหมู่ :</td>
+                    <td align="left">{{ categories.name }}</td>
+                </tr>
+                <tr>
+                    <td align="right">สาขา :</td>
+                    <td align="left">{{ categories.desc }}</td>
+                </tr>
+            </table>
+            <a onclick="history.back();" class="btn btn-warning">
+                <i class="fas fa-backward"></i> ย้อนกลับ
+            </a>
+            <a href="{% url 'delCategories' categories.name  %}" onclick="return confirm('โปรดยืนยันการลบข้แมูล');">
+                <button class="btn btn-success">
+                    ลบข้อมูล <i class="fas fa-trash"></i>
+                </button>
+            </a>
+            <div class="col-lg-3"></div>
+            <br><br><br><br><br><br><br><br><br><br><br>
+        </div>
+    </div>
+{% endblock %}

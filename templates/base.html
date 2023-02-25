@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai+Looped&display=swap" rel="stylesheet">
+    <link type="text/css" rel="stylesheet"
+          href={% static 'stylesheet/bt523/css/bootstrap.css' %}>
+    <link type="text/css" rel="stylesheet" href="{% static 'stylesheet/fontawesome5/css/all.css' %}">
+    <script src='{% static 'stylesheet/bt523/js/bootstrap.js' %}'></script>
+    <meta charset="UTF-8">
+    <title>Fast Express</title>
+</head>
+
+<body>
+
+<div class="container-fluid ">
+    <div class=" row">
+        <div class="col-lg-12 " style="background-color: gold">
+            {% include 'menubar.html' %}
+        </div>
+    </div>
+
+    <div class="row" style="background-color: lightyellow">
+        <div class="col-lg-2 ">
+            <br>
+            {% include 'menuNew.html' %}
+        </div>
+        <div class="col-lg-10 ">
+            {% block info %}
+            {% endblock %}
+            {% block content %}
+            {% endblock %}
+        </div>
+    </div>
+
+    <div class="row" style="background-color: black">
+        {% include 'footer.html' %}
+    </div>
+
+</div>
+</body>
+</html>

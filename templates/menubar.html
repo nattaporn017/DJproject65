@@ -1,0 +1,105 @@
+{% load static %}
+<div class="row">
+    <div class="col-lg-9">
+        <nav class="navbar navbar-expand-sm">
+            <div class="container-fluid ">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse " id="mynavbar">
+                    <ul class="navbar-nav me-auto text-dark">
+                        <li class="nav-item text-dark">
+                            <a class="nav-link" href="{% url 'home' %}"><i class="fa fa-home"> หน้าหลัก </i></a>
+                        </li>
+                        <li class="nav-item text-dark">
+                            <a class="nav-link" href="{% url 'shopping' %}"><i class="fa fa-shopping-bag"> ช้อปปิ้ง </i></a>
+                        </li>
+                        <li class="nav-item text-dark">
+                            <a class="nav-link" href="{% url 'news' %}"><i class="fa fa-newspaper"> ศูนย์ข่าว </i></a>
+                        </li>
+                        <li class="nav-item text-dark">
+                            <a class="nav-link" href="{% url 'warning' %}"><i class="fa fa-newspaper"> พัสดุต้องห้าม </i></a>
+                        </li>
+                        <li class="nav-item text-dark">
+                            <a class="nav-link" href="{% url 'question' %}"><i class="fa fa-newspaper"> คำถามที่พบบ่อย </i></a>
+                        </li>
+                        <li class="nav-item text-dark">
+                            <a class="nav-link" href="{% url 'fast' %}"><i class="fa fa-newspaper"> อัตลักษณ์ </i></a>
+                        </li>
+                        <li class="nav-item text-dark">
+                            <a class="nav-link" href="{% url 'howto' %}"><i class="fa fa-newspaper"> วิธีส่งและรับพัสดุ</i></a>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <div class="col-lg-1 text-center text-dark" style="background-color: lightyellow">
+        <br>
+        <a class="nav-link" href="{% url 'userLogin' %}"
+           data-bs-toggle="tooltip" title="Log in!">
+            <i class="fa fa-user "></i> เข้าสู่ระบบ </a>
+    </div>
+    <div class="col-lg-1 text-center text-dark" style="background-color: gainsboro">
+        <br>
+        <a class="nav-link" href="{% url 'cusRegister' %}"
+           data-bs-toggle="tooltip" title="Registration!">
+            <i class="fa fa-arrow-alt-circle-right "></i> สร้างบัญชี </a>
+    </div>
+
+    <div class="col-lg-1 " align="center" style="background-color: lightyellow">
+        <!-- Offcanvas Sidebar -->
+        <div class="offcanvas offcanvas-top" id="demo" style="background-color: lemonchiffon">
+            <div class="offcanvas-header">
+                <h3 class="offcanvas-title" style="background-color: lightgoldenrodyellow;
+                    border-style: double;border-width: 5px;background-color: #51585e;
+                    background-color: #f2e7c3"> ข้อมูลผู้ใช้ระบบ </h3>
+                <button type="button" class="btn-close btn-close-dark" data-bs-dismiss="offcanvas"></button>
+            </div>
+            <div class="offcanvas-body" align="left">
+                <i class="fas fa-voicemail"></i> User ID: {{ request.session.userId }} <br>
+                <i class="fas fa-user-tie"></i> User Name: {{ request.session.userName }} <br>
+                <i class="fas fa-briefcase"></i> Status: {{ request.session.userStatus }} <br>
+                {% if request.session.userStatus == 'customer' %}
+                    <div class="row">
+                        <div class="col-lg-7">
+                            <a href="{% url 'updateCus' request.session.userId %}"
+                               class="text-lg-start text-success text-decoration-none">
+                                <i class="fa fa-cog"></i> อัพเดตโปรไฟล์ </a>
+                        </div>
+                        <div class="col-lg-3" align="right">
+                            <a href="{% url 'cusChangePassword' %}"
+                               class="text-lg-start text-danger text-decoration-none">
+                                <i class="fa fa-key"></i> เปลี่ยนรหัสผ่าน </a>
+                        </div>
+
+                        <div class="col-lg-2" align="right">
+                            <a href="{% url 'userLogout' %}"
+                               class="text-lg-start text-danger text-decoration-none">
+                                <i class="fa fa-sign-out-alt"></i> ออกจากระบบ </a>
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="row">
+                        <div class="col-lg-10"></div>
+                        <div class="col-lg-2" align="right">
+                            <a href="{% url 'userLogout' %}"
+                               class="text-lg-start text-danger text-decoration-none">
+                                <i class="fa fa-sign-out-alt"></i> ออกจากระบบ </a>
+                        </div>
+                    </div>
+                {% endif %}
+                <br>
+            </div>
+        </div>
+        <!-- Button to open the offcanvas sidebar -->
+        <button class="btn text-dark " style="font-size: 30px" type="button" data-bs-toggle="offcanvas"
+                data-bs-target="#demo"><i
+                class="fa fa-cog"></i></button>
+    </div>
+
+</div>
+
+

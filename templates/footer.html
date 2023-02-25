@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+{% load static %}
+{% load humanize %}
+<html lang="en">
+<head>
+    <link type="text/css" rel="stylesheet" href="{% static 'stylesheet/bt523/css/bootstrap.css' %}">
+    <link type="text/css" rel="stylesheet" href="{% static 'stylesheet/fontawesome5/css/all.css' %}">
+    <script src='{% static 'stylesheet/bt523/js/bootstrap.js' %}'></script>
+    <meta charset="UTF-8">
+</head>
+
+<body>
+
+<div class="row">
+    <br>
+    <div class="col-lg-2 text-white text-center">
+        <br><br>
+        <p> สำหรับแอดมิน <i class="fa fa-arrow-down"></i></p>
+        <button class="btn bg-white" type="button">
+            <a href="admin" class=" text-center " data-bs-toggle="tooltip" title="Admin App." target="_blank">
+            <i class="fa fa-toolbox "></i><br> ADMIN :</a>
+        </button>
+    </div>
+
+    <br>
+    <div class="col-lg-6 text-white" align="right">
+        <br><br><br><br>
+        <p>Add Line <i class="fa fa-arrow-right"></i></p>
+    </div>
+
+    <div class="col-lg-2">
+        <img class="card-img-top" src="{% static "images/QR1.jpg" %}" width="10px" height="200px">
+    </div>
+
+    <div class="col-lg-2">
+        <br>
+        <p class="text-white" style="font-size: 16px" align="left">
+            <br><br><br><br>
+            CONTACT US.<br>
+            www.fastexpress.com<br>
+            Tel.08x-xxxxxxx <i class="fa fa-phone-alt"></i>
+        </p>
+    </div>
+
+    <br>
+</div>
+
+</body>
+</html>

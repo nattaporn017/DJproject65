@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% block content %}
+    {% load static %}
+    {% load humanize %}
+    <div class="row  text-center "style="background-color: lightyellow">
+        <div class="col-lg-3"></div>
+        <div class="col-lg-4">
+            <img src="{% static "images/ttBranch.png" %}">
+        </div>
+        <div class="col-lg-5"></div>
+        <div class="row ">
+            <div class="col-lg-1"></div>
+            <div class="col-lg-10">
+                <table class="table table-warning table-hover table-striped table-bordered text-center">
+                    <tr>
+                        <th>รหัสสาขา</th>
+                        <th>สาขา</th>
+                        <th>ที่ตั้ง</th>
+                        <th>เบอร์ติดต่อ</th>
+                        <th>
+                            <a href="{% url 'createBranch' %}">
+                                <button class="btn btn-warning" data-bs-toggle="tooltip" title="create!">
+                                    เพิ่มสาขา <i class=" fa fa-plus"></i>
+                                </button>
+                            </a>
+                        </th>
+                    </tr>
+                    {% for branch in result %}
+                        <tr>
+                            <td>{{ branch.branch_id }}</td>
+                            <td>{{ branch.name }}</td>
+                            <td>{{ branch.location }}</td>
+                            <td>{{ branch.tel }}</td>
+                            <td>
+                                <a href="{% url 'oneBranch' branch.branch_id %}" data-bs-toggle="tooltip" title="desc!"style="color: black">
+                                    <i class="fa fa-search">&emsp;</i>
+                                </a>
+
+                                <a href="{% url 'updateBranch' branch.branch_id %}" data-bs-toggle="tooltip" title="update!"style="color: black">
+                                    <i class="fas fa-file-signature">&emsp;</i>
+                                </a>
+                                <a href="{% url 'gtdelBranch' branch.branch_id %}" data-bs-toggle="tooltip" title="delete!"style="color: black">
+                                    <i class="fa fa-trash-alt"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+            <div class="col-lg-1"></div>
+        </div>
+    </div>
+<br><br><br><br><br><br><br><br><br><br><br>
+{% endblock %}

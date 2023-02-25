@@ -1,0 +1,54 @@
+<div class="list-group">
+    <li class="list-group-item  list-group-item-warning bg-warning text-dark"><b> Menu :</b></li>
+    {% if request.session.userId is None %}
+
+    {% else %}
+        {% if request.session.userStatus == 'customer' %}
+            <a href="{% url 'allOrder' %}"
+               class="list-group-item list-group-item-action list-group-item-light text-dark">
+                <i class="fa-solid fa-folder-tree"></i><u> รายการสั่งซื้อ </u></a>
+            <a href="#" class="list-group-item list-group-item-action list-group-item-light text-dark">
+                <i class="fa-solid fa-folder-tree"></i><u> รายการการจัดพัสดุ </u></a>
+        {% else %}
+            {#            <a href="{% url 'categoryList' %}" class="list-group-item list-group-item-action list-group-item-light text-primary">#}
+            {#                <i class="fa fa-list"></i> Category Listing</a>#}
+            {#            <a href="{% url 'productList' %}" class="list-group-item list-group-item-action list-group-item-light text-primary">#}
+            {#                <i class="fa fa-list"></i> Product Listing</a>#}
+            {#            <a href="{% url 'productListPage' 1 %}" class="list-group-item list-group-item-action list-group-item-light text-primary">#}
+            {#                <i class="fa fa-list"></i> Product Listing (Pagination)</a>#}
+            {#            <a href="{% url 'employeeList' %}" class="list-group-item list-group-item-action list-group-item-light text-primary">#}
+            {#                <i class="fa fa-list"></i> Employee Listing</a>#}
+            {#            <a href="{% url 'customerList' %}" class="list-group-item list-group-item-action list-group-item-light text-primary">#}
+            {#                <i class="fa fa-list"></i> Customer Listing</a>#}
+
+            <a href="{% url 'allOrder' %}"
+               class="list-group-item list-group-item-action list-group-item-light text-dark">
+                <i class="fa-solid fa-folder-tree"></i><u> ระบบจัดการรายการออเดอร์ </u></a>
+
+
+            <a href="{% url 'listBranch' %}"
+               class="list-group-item list-group-item-action list-group-item-light text-dark">
+                <i class="fa-solid fa-folder-tree"></i><u> ระบบจัดการสาขา </u></a>
+
+            <a href="{% url 'listCategories' %}"
+               class="list-group-item list-group-item-action list-group-item-light text-dark">
+                <i class="fa-solid fa-folder-tree"></i><u> ระบบจัดการหมวดหมู่สินค้า </u></a>
+
+            <a href="{% url 'listAcc' %}"
+               class="list-group-item list-group-item-action list-group-item-light text-dark">
+                <i class="fa-solid fa-folder-tree"></i><u> ระบบจัดการรายการสินค้า </u></a>
+
+            <a href="{% url 'listCus' %}"
+               class="list-group-item list-group-item-action list-group-item-light text-dark">
+                <i class="fa-solid fa-folder-tree"></i><u> ระบบจัดการรายชื่อลูกค้า </u></a>
+            <a href="{% url 'listEmp' %}"
+               class="list-group-item list-group-item-action list-group-item-light text-dark">
+                <i class="fa-solid fa-folder-tree"></i><u> ระบบจัดการรายชื่อพนักงาน </u></a>
+            <br><br>
+
+
+            {#            <a href="{% url 'showHistoryOrder' %}" class="list-group-item list-group-item-action list-group-item-light text-secondary">#}
+            {#                <i class="fa-solid fa-folder-tree"></i> History Order </a>#}
+        {% endif %}
+    {% endif %}
+</div>

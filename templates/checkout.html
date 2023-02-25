@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+{% load  static %}
+
+{% block content %}
+
+    <script>
+        var source = window.document.getElementsById("checkout")[0];
+        var specialElementHandlers = {
+            '#hidden-element': function (element, renderer) {
+                return true;
+            }
+        };
+        var doc = new jsPDF({
+            orientation: 'landscape'
+        });
+        doc.setFont("courier");
+        doc.setFontType("normal");
+        doc.setFontSize(24);
+        doc.setTextColor(100);
+        doc.fromHTML(elementHTML, 15, 15, {
+            'width': 170,
+            'elementHandlers': specialElementHandlers
+        });
+    </script>
+    <div id="checkout">
+
+        <div class="row">
+            <div class="col col-2"><img src="{% static "images/checkout.png" %}"></div>
+            <div class="col col-8"></div>
+            <div class="lead text-dark">
+                <h5>
+                    วันที่ : {{ order.odate }}<br>
+                    ลูกค้า : {{ order.customer.name }}<br>
+                    ที่อยู่ : {{ order.customer.address }}<br>
+                    เบอร์โทรศัพท์ : {{ order.customer.tel }}
+                </h5>
+            </div>
+        </div>
+
+
+        <table class="table table-success table-bordered">
+            <tr class="text-center text-dark">
+                <th class="col col-1">รหัสสินค้า</th>
+                <th class="col col-4">สินค้า</th>
+                <th class="col col-1">ราคาต่อหน่วย</th>
+                <th class="col col-1">จำนวน</th>
+                <th class="col col-2">รวม</th>
+            </tr>
+
+            <tr class="bg-success">
+                <td style="background-color: lightyellow"></td>
+            </tr>
+
+            {% for item in items %}
+                <tr class="bg-success">
+                    <td class="text-center"type="hidden" name="aid" value="{{ items.accessories.aid }}" >{{ item.accessories.aid }}  </td>
+                    <td class="text-center">{{ item.accessories.name }}</td>
+                    <td class="text-end">{{ item.accessories.price }}</td>
+                    <td class="text-center">{{ item.quantity }}</td>
+                    <td class="text-end"><b>{{ item.total | floatformat:2 }}</b></td>
+                </tr>
+
+                <tr >
+                    <td style="background-color: lightyellow" ></td>
+                </tr>
+
+            {% endfor %}
+            <input type="hidden" name="aid" value="{{ items.accessories.aid }}">
+            <tr class="text-end text-dark">
+                <td colspan="4" class="bg-white"><h3>จำนวนทั้งหมด :</h3></td>
+                <td class="bg-white text-success"><h3>{{ request.session.count }} </h3></td>
+            </tr>
+
+            <tr class="text-end text-dark">
+                <td colspan="4" class="bg-white"><h3>ยอดสุทธิ : </h3></td>
+                <td class="bg-white text-success"><h3 style="background-color: darkseagreen">{{ request.session.sum | floatformat:2 }} </h3></td>
+            </tr>
+
+            <tr></tr>
+        </table>
+
+        <div align="right">
+            <a href="{% url 'showBasket' %}" class="btn btn-warning"><i class="fa fa-shopping-cart"></i>กลับไปที่รถเข็นสินค้า</a>
+            <a href="{% url 'order' %}" class="btn btn-success "
+               onclick="return confirm('โปรดยืนยันคำสั่งซื้อ')"><i class="fa fa-check-double"></i> Check Out </a>
+            <br>
+            <br><br><br><br><br><br><br><br>
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% block content %}
+    {% load static %}
+    {% load humanize %}
+    <div class="row  text-center "style="background-color: lightyellow">
+        <div class="col-lg-3"></div>
+        <div class="col-lg-4">
+            <img src="{% static "images/ttAcc.png" %}">
+        </div>
+        <div class="col-lg-5"></div>
+        <div class="row ">
+            <div class="col-lg-1"></div>
+            <div class="col-lg-10">
+                <table class="table table-warning table-hover table-striped table-bordered text-center">
+                    <tr>
+                        <th>หมวดหมู่</th>
+                        <th>รหัสสินค้า</th>
+                        <th>สินค้า</th>
+                        <th>ราคาต่อหน่วย</th>
+                        <th>คงเหลือ</th>
+
+                        <th>
+                            <a href="{% url 'createAcc' %}">
+                                <button class="btn btn-warning" data-bs-toggle="tooltip" title="create!">
+                                    เพิ่มสินค้า <i class=" fa fa-plus"></i>
+                                </button>
+                            </a>
+                        </th>
+                    </tr>
+                    {% for acc in result %}
+                        <tr>
+                            <td>{{ acc.category.name }}</td>
+                            <td>{{ acc.aid }}</td>
+                            <td>{{ acc.name }}</td>
+                            <td>{{ acc.price }}</td>
+                            <td>{{ acc.net }}</td>
+
+                            <td>
+                                <a href="{% url 'oneAcc' acc.aid %}" data-bs-toggle="tooltip" title="desc!"style="color: black">
+                                    <i class="fa fa-search">&emsp;</i>
+                                </a>
+                                <a href="{% url 'updateAcc' acc.aid %}" data-bs-toggle="tooltip" title="update!"style="color: black">
+                                    <i class="fas fa-file-signature">&emsp;</i>
+                                </a>
+                                <a href="{% url 'gtdelAcc' acc.aid %}" data-bs-toggle="tooltip" title="delete!"style="color: black">
+                                    <i class="fa fa-trash-alt"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+            <div class="col-lg-1"></div>
+        </div>
+    </div>
+<br><br><br><br><br><br><br><br><br><br><br>
+{% endblock %}

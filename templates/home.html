@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+    <div class="row " style="background-color: lightyellow; font-family: 'Arial Rounded MT Bold'">
+        <br>
+        <div class="col-lg-4"></div>
+        <div class="col-lg-4 text-center">
+            <br>
+            <img src="{% static "images/logo.png" %}" width="140px" height="120px">
+            <br><br>
+            <div class="input-group mb-3">
+                {#                {% csrf_token %}#}
+                <input type="text" class="form-control" placeholder="ป้อนเลขพัสดุ">
+                <button class="btn btn-secondary" type="submit"><i class="fa fa-search"></i></button>
+            </div>
+            <br>
+
+        </div>
+        <div class="col-lg-4"></div>
+    </div>
+
+    <div class="row " style="background-color: lightyellow;">
+        <div class="col-lg-12 text-center">
+            <img src="{% static "images/fast.png" %}" height="300" style="border-width: 5px;border-style: double;border-color: #d7d8da;
+                            border-color: #565e64;">
+            <img src="{% static "images/vdo.gif" %}" height="350" style="border-width: 5px;border-style: double;border-color: #d7d8da;
+                            border-color: #565e64;">
+            <img src="{% static "images/fff.png" %}" height="300" style="border-width: 5px;border-style: double;border-color: #d7d8da;
+                            border-color: #565e64;">
+            <br><br><br><br><br>
+        </div>
+    </div>
+
+{% endblock %}

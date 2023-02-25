@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+{% load  static %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col col-2"><img src="{% static "images/oDetail.png" %}"></div>
+        <div class="col col-8"></div>
+        <div class="lead text-dark">
+            <h5>
+                วันที่ : {{ order.odate }}<br>
+                ลูกค้า : {{ order.customer.name }}<br>
+                ที่อยู่ : {{ order.customer.address }}<br>
+                เบอร์โทรศัพท์ : {{ order.customer.tel }}<br>
+                สถานะปัจจุบัน : {{ order.getStatus }}
+            </h5>
+        </div>
+    </div>
+
+    <table class="table table-secondary table-bordered">
+        <tr class="text-center text-dark">
+            <th class="col col-1">รหัสสินค้า</th>
+            <th class="col col-4">ชื่อสินค้า</th>
+            <th class="col col-1">ราคาต่อหน่วย</th>
+            <th class="col col-1">จำนวน</th>
+            <th class="col col-2">รวม</th>
+        </tr>
+        <tr>
+            <td style="background-color: lightyellow"></td>
+        </tr>
+        {% for item in order.getOrderDetails %}
+            <tr>
+                <td class="text-center">{{ item.accessories.aid }}  </td>
+                <td class="text-start">{{ item.accessories.name }}</td>
+                <td class="text-end">{{ item.oprice }}</td>
+                <td class="text-center">{{ item.quantity }}</td>
+                <td class="text-end">{{ item.getTotal }}</td>
+            </tr>
+            <tr>
+                <td style="background-color: lightyellow"></td>
+            </tr>
+        {% endfor %}
+        <tr class="text-end text-dark">
+            <td colspan="4" class="bg-white"><h3>จำนวนทั้งหมด :</h3></td>
+            <td class="bg-white"><h3>{{ order.getCount }} </h3></td>
+        </tr>
+        <tr class="text-end text-dark">
+            <td colspan="4" class="bg-white"><h3> ยอดสุทธิ : </h3></td>
+            <td class="bg-white"><h3>{{ order.getTotal | floatformat:2 }} </h3></td>
+        </tr>
+
+        <tr>
+            <td colspan="6" align="right">
+                <button class="btn btn-secondary" onclick="history.back()">
+                    <i class="fa fa-rotate-back"></i> ย้อนกลับ
+                </button>
+                {% if request.session.userStatus == 'customer' %}
+                    {% if order.status == '1' %}
+                        <a href="" class="btn btn-secondary disabled">
+                            <i class="fas fa-walking"></i> Wait for Confirm (รอยืนยัน)</a>
+                    {% elif order.status == '2' %}
+                        <a href="{% url 'transfer' order.oid %}" class="btn btn-success">
+{#                            {% url 'transfer' order.oid %}#}
+                            <i class="fas fa-coins"></i> ชำระเงิน </a>
+                    {% elif order.status == '3' %}
+                        <a href="" class="btn btn-secondary disabled">
+                            <i class="fas fa-hourglass-half"></i> Wait for Money Accept (รอยืนยันการชำระเงิน)</a>
+                    {% elif order.status == '4' %}
+                        <a href="" class="btn btn-success disabled">
+                            <i class="fas fa-hourglass-half"></i> Wait for Send Product (รอส่งสินค้า)</a>
+                    {% elif order.status == '5' %}
+                        <a href="" class="btn btn-success disabled text-white">
+                            <i class="fas fa-shield-check"></i> Complete (เสร็จสมบูรณ์)</a>
+                    {% endif %}
+                {% else %}
+                    {% if order.status == '1' %}
+                        <a href="{% url 'confirm' order.oid %}" class="btn btn-success"
+                           onclick="return confirm('ยืนยันใบสั่งซื้อใบนี้ !')"> ยืนยัน </a>
+                    {% elif order.status == '2' %}
+                        <a href="" class="btn btn-secondary disabled">
+                            <i class="fas fa-hourglass-half"></i>รอการโอนเงิน</a>
+                    {% elif order.status == '3' %}
+                        <a href="{% url 'accept' order.oid %}" class="btn btn-success"
+                           onclick="return confirm('ยืนยันการโอนเงินถูกต้อง')">
+                            <i class="fas fa-hourglass-half"></i>ยืนยันการชำระเงินแล้ว</a>
+                    {% elif order.status == '4' %}
+                        <a href="{% url 'productSend' order.oid %}" class="btn btn-primary">
+                            <i class="fas fa-hourglass-half"></i>กำลังจัดส่งสินค้า</a>
+                    {% elif order.status == '5' %}
+                        <a href="#" class="btn  btn-success disabled text-white">
+                            <b><i class="fas fa-shield-check"></i>เสร็จสมบูรณ์</b></a>
+                    {% endif %}
+                {% endif %}
+            </td>
+        </tr>
+    </table>
+    <br><br><br><br><br><br><br><br><br>
+{% endblock %}

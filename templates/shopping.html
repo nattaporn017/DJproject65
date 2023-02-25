@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="row">
+        <div class="col col-10" align="center">
+            <img src="{% static "images/Acc.png" %}">
+            <br><br>
+        </div>
+        <div class="col col-2 text-lg-end">
+        <br><br>
+            {% if 'count' in request.session %}
+                <a href="{% url 'showBasket' %}" class="btn btn-outline-danger btn-sm">
+                    <i class="fa fa-shopping-cart text-lg-center"></i>
+                    รถเข็นสินค้า :
+                    <span class="badge  bg-danger">{{ request.session.count }}</span>
+                </a>
+            {% endif %}
+        </div>
+    </div>
+    <table class="table">
+        <tr>
+        {% for accessories in accessoriess %}
+
+            <td> <img src="{% static "IMGproduct/B1.png" %}" width="100px" height="18px" class="img img-thumbnail"></td>
+            <td class="text-dark"style="font-size: 14px">
+                รหัสสินค้า : <b class="text-success"> {{ accessories.aid }} </b> <br>
+                <b class="text-success">{{ accessories.name }}</b> <br>
+                หมวดหมู่ : <br>
+                <b class="text-success"> {{ accessories.category.name }}</b><br>
+                ราคา : <b class="text-success">{{ accessories.price | floatformat:2}} </b> <br><br>
+                <form method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" name="aid" value="{{ accessories.aid }}">
+                    <input type="number" name="qnt" value="1" min="1" max="20" style="width:75px">
+
+                    <button class="btn text-success " style="font-size: 20px" type="submit" >
+                        <i class="fa fa-shopping-cart"></i></button>
+                </form>
+            </td>
+            <td> <br> </td>
+            {% if forloop.counter|divisibleby:3 and not forloop.last %}
+                </tr>
+                <tr><td> <br> </td> </tr>
+                <tr>
+            {% endif %}
+        {% endfor %}
+        </tr>
+    </table>
+    <br><br><br><br><br>
+
+
+{% endblock %}

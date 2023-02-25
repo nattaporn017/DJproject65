@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="row text-dark" align="right">
+        <div class="col-lg-1">
+            <img src="{% static "images/basket.png" %}"><br>
+        </div>
+        <div class="col-lg-8 text-center">
+            <br><br><br>
+            <h4> จำนวน {{ request.session.count }} รายการ <br><br>
+                ยอดที่ต้องชำระ : <u class="text-danger">{{ request.session.sum | floatformat:2 }}</u> บาท
+            </h4>
+        </div>
+        <div class="col-lg-3 " style="font-size: 16px" align="right">
+            <br><br><br><br>
+            <a href="{% url 'clearBasket' %}" class="btn btn-outline-danger btn-sm"
+               onclick="return confirm('โปรดยืนยันการยกเลิกรายการทั้งหมดในตระกร้า !')">
+                <i class="fas fa-window-close"></i></i><br> ยกเลิกตะกร้าสินค้า </a>
+        </div>
+    </div>
+
+    <table class="table table-success table-bordered">
+        <tr class="text-center text-dark">
+
+            <th class="col col-3">ชื่อสินค้า</th>
+            <th class="col col-1">หมวดหมู่</th>
+            <th class="col col-1">ราคาต่อชิ้น</th>
+            <th class="col col-2">จำนวน</th>
+            <th class="col col-1">ลบสินค้า</th>
+            <th class="col col-2">รวม</th>
+        </tr>
+        <tr>
+            <td style="background-color: lightyellow"></td>
+        </tr>
+
+        {% for item in items %}
+            <form method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="aid" value="{{ items.accessories.aid }}">
+                <tr>
+
+                    <td class="text-start">{{ item.accessories.name }}</td>
+                    <td class="text-start">{{ item.accessories.category.name }}</td>
+                    <td class="text-end">{{ item.accessories.price }}</td>
+
+                    <td class="text-center">
+                        <input type="hidden" name="aid" value="{{ item.accessories.aid }}">
+                        <input type="number" name="qnt" style="width:75px" value="{{ item.quantity }}" min="1" max="20">
+                        <br>
+                        <button type="submit" class="btn text-success" name="action" value="Update">
+                            <i class="fa fa-plus"></i> อัพเดตจำนวน
+                        </button>
+
+                    </td>
+                    <td align="center">
+                        <button type="submit" class="btn btn-danger" name="action" value="Remove"
+                                onclick="return confirm('โปรดยืนยันการลบสินค้ารายการนี้ออกจากตระกร้า !')">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </td>
+                    <td class="text-end"><b>{{ item.total | floatformat:2 }}</b></td>
+                </tr>
+            </form>
+            <tr>
+                <td style="background-color: lightyellow"></td>
+            </tr>
+        {% endfor %}
+    </table>
+    <div class="row" align="right">
+        <p>
+            <a href="{% url 'shopping' %}" class="btn btn-warning"><i class="fa fa-shopping-cart"></i> กลับไปเลือกสินค้า
+            </a>
+            <a href="{% url 'checkout' %}" class="btn btn-success"><i class="fa fa-check"></i> Check out</a>
+            <br><br><br><br><br><br><br><br><br><br><br>
+        </p>
+    </div>
+
+{% endblock %}

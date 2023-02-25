@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+{% load  static %}
+
+{% block content %}
+    <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+    </script>
+    <br>
+    <div class="row">
+        {% if request.session.userStatus == 'customer' %}
+            <div class="col col-lg-12 text-center">
+                <img src="{% static "images/order.png" %}"><br>
+            </div>
+            <div class="lead text-dark">
+                <h6>
+                    ลูกค้า : {{ customer.cid }} {{ customer.name }}<br>
+                    ที่อยู่ : {{ customer.address }}<br>
+                    เบอร์โทรศัพท์ : {{ customer.tel }}
+                </h6>
+            </div>
+        {% else %}
+            <div class="col-lg-1">
+                <img src="{% static "images/oderIn.png" %}"><br>
+            </div>
+        {% endif %}
+    </div>
+    <table class="table table-warning table-bordered">
+        <tr class="text-center text-dark text-center">
+            <th class="col col-2">Order ID</th>
+            <th class="col col-2">วันที่</th>
+            <th class="col col-1">จำนวน</th>
+            <th class="col col-1">ยอดรวม</th>
+            {#            <th class="col col-4">ความคืบหน้า </th>#}
+            <th class="col col-2">สถานะปัจจุบัน</th>
+        </tr>
+        <tr>
+            <td style="background-color: lightyellow"></td>
+        </tr>
+        {% if orders.count == 0 %}
+            <tr style="background-color: lightyellow">
+                <td colspan="6" class="text-center">
+                    <b class="text-danger text-center">*** ยังไม่มีรายการสั่งซื้อใด ๆ ***</b>
+                </td>
+            </tr>
+        {% else %}
+            {% for order in orders %}
+                <tr>
+                    <td class="text-center"><br>
+                        <a href="{% url 'showOrderDetail' order.oid %}"
+                           class="text-decoration-none"><u><b>{{ order.oid }}</b></u> </a>
+                    </td>
+                    <td class="text-center"><br>{{ order.odate | date:"Y-m-d H:i:s" }}  </td>
+                    {#                    <td class="text-center">{{ order.odate }}  </td>#}
+                    <td class="text-center"><br>{{ order.getCount }}</td>
+                    <td class="text-center"><br>{{ order.getTotal | floatformat:2 }}</td>
+                    <td class="text-center">
+                        {% if order.status == '1' %}
+                            <button class="btn btn-sm  btn-info disabled"><i class="fas fa-walking"></i>
+
+                                {{ order.getStatus }}</button>
+                            <br><br>
+                            {% if request.session.userStatus == 'customer' %}
+                                <a href="{% url 'orderCancel' order.oid %}" class="text-danger"> <i
+                                        class="fas fa-times-circle"> ยกเลิกคำสั่งซื้อ</i></a>
+                            {% endif %}
+                        {% elif order.status == '2' %}
+                            <button class="btn btn-sm  btn-info disabled"><i class="fas fa-toggle-on"></i>
+                                {{ order.getStatus }}</button>
+                        {% elif order.status == '3' %}
+                            <button class="btn btn-sm  btn-info disabled"><i class="fas fa-toggle-on"></i>
+                                {{ order.getStatus }}</button>
+                        {% elif order.status == '4' %}
+                            <button class="btn btn-sm  btn-info disabled"><i class="fas fa-toggle-on"></i>
+                                {{ order.getStatus }}</button>
+                        {% endif %}
+
+                        {% if request.session.userStatus == 'customer' %}
+                            {% if order.status == '5' %}
+                                <button class="btn btn-sm  btn-light disabled text-success">
+                                    <i class="fa fa-flag"></i> <b> {{ order.getStatus }} </b></button>
+                            {% elif order.status == '6' %}
+                                <button class="btn btn-sm  btn-light disabled text-danger">
+                                    <i class="fas fa-times-circle"></i> <b> {{ order.getStatus }}</b></button>
+                            {% elif order.status == '7' %}
+                                <button class="btn btn-sm  btn-light disabled text-danger">
+                                    <i class="fa-solid fa-ban"></i> <b> {{ order.getStatus }} </b></button>
+                            {% endif %}
+                        {% endif %}
+                    </td>
+                </tr>
+                <tr class="bg-white">
+                    <td style="background-color: lightyellow"></td>
+                </tr>
+            {% endfor %}
+        {% endif %}
+    </table>
+    <br><br><br><br><br><br><br><br><br>
+{% endblock %}

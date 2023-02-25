@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% block content %}
+    {% load static %}
+    {% load humanize %}
+    <div class="row  text-center "style="background-color: lightyellow">
+        <div class="col-lg-3"></div>
+        <div class="col-lg-4">
+            <img src="{% static "images/ttCustomer.png" %}">
+        </div>
+        <div class="col-lg-5"></div>
+        <div class="row ">
+            <div class="col-lg-1"></div>
+            <div class="col-lg-10">
+                <table class="table table-warning table-hover table-striped table-bordered text-center">
+                    <tr>
+                        <th>ชื่อ - สกุล</th>
+                        <th>เพศ</th>
+                        <th>วันเกิด</th>
+                        <th>ที่อยู่</th>
+                        <th>เบอร์โทรศัพท์</th>
+                        <th>รหัสลูกค้า</th>
+                        <th>
+                            <a href="{% url 'createCus' %}">
+                                <button class="btn btn-warning" data-bs-toggle="tooltip" title="create!">
+                                    เพิ่มลูกค้า <i class=" fa fa-plus"></i>
+                                </button>
+                            </a>
+                        </th>
+                    </tr>
+                    {% for cus in customers %}
+                        <tr>
+                            <td>{{ cus.name }}</td>
+                            <td>{{ cus.gender }}</td>
+                            <td>{{ cus.birthdate }}</td>
+                            <td>{{ cus.address }}</td>
+                            <td>{{ cus.tel }}</td>
+                            <td>{{ cus.cid }}</td>
+                            <td>
+                                <a href="{% url 'oneCus' cus.cid %}" data-bs-toggle="tooltip" title="desc!"style="color: black">
+                                    <i class="fa fa-search">&emsp;</i>
+                                </a>
+                                <a href="{% url 'updateCus' cus.cid %}" data-bs-toggle="tooltip" title="update!"style="color: black">
+                                    <i class="fas fa-file-signature">&emsp;</i>
+                                </a>
+                                <a href="{% url 'gtdelCus' cus.cid %}" data-bs-toggle="tooltip" title="delete!"style="color: black">
+                                    <i class="fa fa-trash-alt"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            <br><br><br><br>
+            </div>
+            <div class="col-lg-1"></div>
+        </div>
+    </div>
+{% endblock %}
